@@ -93,6 +93,9 @@ class Node:
         
         current_inbox = '\n'.join([ f"{message['from']} said {message['message']}" for message in self.inbox]) if self.inbox else "No interactions"
 
+        current_outbox = '\n'.join([ f"You sent {message['message']} to {message['to']}" for message in self.outbox]) if self.inbox else "No interactions"
+
+        
         notes = '\n'.join(self.notes)
 
         
@@ -101,6 +104,10 @@ class Node:
         You have learned the following from your interactions:
         Your observations:
         {notes}
+
+        Messages you have sent:
+        {current_outbox}
+                
         Messages you have received:
         {current_inbox}
         """
