@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+<div id="home-container">
+  <h1 id="home-header">Team Task App</h1>
+  {% if error %}
+  <p id="error">{{error}}</p>
+  {% endif %}
+  <form method="POST" id="chat-widget-home">
+    <div id="name-input">
+      <label for="team">Which team are you a part of?</label>
+      <select id="team" name="team"
+          hx-get="/team_members" hx-target="#members" hx-indicator=".htmx-indicator">
+          >
+          <option value="" selected>Select your team name</option>
+          {% for team in team_names %}
+            <option value="{{ team }}">{{ team }} </option>
+          {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="member" id="member-label">Who are you?</label>
+        <select id="members" name="member">
+            
+        </select>
+      
+    </div>
+    <div>
+        <button type="submit" id="join" name="join">Join your team</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

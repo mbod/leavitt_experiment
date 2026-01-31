@@ -1,0 +1,93 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<div id="room-container">
+  <h2 id="home-header">Team {{ team }}</h2>
+  <h3>Hello {{ member }}! - Your symbols: <span id="symbols">{{ symbols }}</span></h3>
+  <div id="messages">
+
+    {% for neighbor in neighbors %}
+
+      <div id="inbox_{{ neighbor }}" class="inbox">
+            <div class="inbox-label">Messages with {{ neighbor }}</div>
+            <div><br/></div>
+      </div>
+
+
+    {% endfor %}
+
+  </div>
+
+   <div id="message-box">
+      <input type="text" placeholder="Enter your message" id="message-input" name="message" />
+      <button type="submit" id="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+
+    <script type="text/javascript">
+    const socketio = io();
+
+    const neighbors = {{ neighbors |safe }};
+    const member = '{{ member }}';
+        
+    socketio.on("message", function (message) { console.log('WS: ' + message); createChatItem(message.message, message.from, message.to) });
+
+    // TODO: fix this hacky resize of inboxes
+    if (neighbors.length==1) {
+        const inbox1 = document.getElementsByClassName('inbox')[0];
+        inbox1.style.width="98%";
+    }
+
+        
+    function createChatItem(message, sender, recipient) {
+
+      // TODO: Fix and check this logic for selecting which WS messages
+      //       to pay attention to - probably a cleaner way of doing this
+      if ((!neighbors.includes(sender) && sender!=member) || (sender!=member && recipient!=member)) {
+          return
+      }
+
+     console.log(`${sender} -> ${recipient}: ${message}`);
+
+      const boxID = (member==recipient) ? sender : recipient;
+        
+      const messages = document.getElementById("inbox_"+boxID);
+
+        
+      if (sender === member) {
+        content = `<p class="member-activity">${message}</p>`;
+      } else {
+        var senderIsUser = "{{user}}" === sender;
+        var content = `
+           <p class="neighbor-activity">${message}</p>
+        `;
+      }
+      messages.innerHTML += content;
+
+      // Keep inbox scrolled to bottom
+      messages.scrollTop = messages.scrollHeight;        
+}
+        
+    function sendMessage() {
+      var msgInput = document.getElementById("message-input");
+      var msg = msgInput.value;
+      if (msg === "" | msg.includes('@') === false) return;
+
+      recipient = msg.toUpperCase().match(/@[A-E]/)[0].replace('@','');
+      if (!neighbors.includes(recipient)) { 
+          msgInput.value = "";
+          return;
+      }
+        
+        console.log(`${member} -> ${recipient}: ${msg}`);
+
+      socketio.emit("message", { message: msg, to: recipient, from: member});
+      msgInput.value = "";
+    }
+  </script>
+
+    
+</div>
+
+
+
+{% endblock %}

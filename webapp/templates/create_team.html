@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block content %}
+<div id="home-container">
+  <h2 id="home-header">Team Task App - Create a team</h2>
+  {% if error %}
+  <p id="error">{{error}}</p>
+  {% endif %}
+
+
+  <br/><hr/><br/>
+    
+  <form method="post" id="create-team-form">
+    <div id="name-input">
+      <label for="team">Team Name</label>
+      <input type="text" name="team" required></input>
+    </div>
+    <div id="network-structure">
+        
+
+      <label for="network-structure">Team network structure</label>  
+      <select id="network-structure" name="structure" required>
+          <option value="" selected>Select network structure</option>
+          {% for network in NETWORKS %}
+            <option value="{{ network }}">{{ network.title() }} </option>
+          {% endfor %}
+      </select>
+    </div>
+    <div>
+        <br/>
+      <table>
+          <thead>
+              <tr>
+                  <th>Node</th>
+                  <th>Is an LLM?</th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for node in NODES %}
+            <tr>
+                <td>{{ node }}</td>
+                <td><input type="checkbox" name="is_LLM" value="{{node}}"/></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <br/><br/>
+    <div>
+        <button type="submit" id="create" name="create">Create team</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

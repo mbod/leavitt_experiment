@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background-color: lightblue;
+  color: #2b2b2b;
+}
+
+
+#root {
+}
+
+
+
+#room-container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(2, auto) 1fr;
+  padding: 0 30px;
+  padding-bottom: 30px;
+}
+
+
+.inbox {
+    position: relative;
+    border: 2px solid #707070;
+    border-radius: 15px;
+    padding: 8px;
+    float: left;
+    height: 200px;   /* TODO: make this relative */
+    width: 48%;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.inbox-label {
+    position: fixed;
+    margin: -9px;
+    background-color: #C0C0C0;
+    color: #111111;
+    padding: 0px 20px;
+    border-radius: 15px;
+    border: 1px solid #333333;
+}
+
+.member-activity {
+    text-align: right;
+    padding: 4px;
+    background-color: #F0AAF0;
+    font-color: #FFFFF;
+    border-radius: 10px;
+    padding: 8px;
+    width: fit-content;
+    /* max-width: 500px; */
+    margin-left: auto;
+    margin-right: 0;
+    margin-bottom: 2px;
+    border-bottom-right-radius: 0;
+    
+}
+
+.neighbor-activity {
+    text-align: left;
+    padding: 4px;
+    background-color: #F0F0AA;
+    font-color: #FFFFF;
+    border-radius: 10px;
+    padding: 5px;
+    width: fit-content;
+    /* max-width: 500px; */
+    margin: 5px 0;
+
+}
+    
+
+#message-box {
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+  height: 50px;
+  display: flex;
+}
+
+#message-input {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 1.1rem;
+  outline: none;
+  border: 4px solid rgb(191, 237, 255);
+  border-right: none;
+  background-color: white;
+  border-bottom-left-radius: 15px;
+}
+
+#symbols {
+    padding: 4px;
+    border: 1px solid #707070;
+}
