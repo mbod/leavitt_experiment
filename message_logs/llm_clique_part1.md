@@ -105,6 +105,14 @@ sequenceDiagram
     B -->> C :Hi C! Based on all collective data <br/> from everyone (D, E, and myself), I <br/> am confident that the common symbol <br/> is @. Let me know if you hear <br/> anything different from A.
     B -->> A :Hi A! Based on all the data I've <br/> gathered from C, D, E, and my own <br/> card, the only possible common <br/> symbol across all cards appears to <br/> be @. Could you confirm your card <br/> symbols to finalize this <br/> conclusion?
     B -->> C :Hi C! Based on the information from <br/> D, E, and myself, the only <br/> consistent symbol across all cards <br/> is @. Let me know if you hear <br/> anything different from A that <br/> might refine or confirm this!
+	```
+	```mermaid
+sequenceDiagram
+    actor A
+    participant B
+    participant C
+    participant D
+    participant E	
     B -->> A :Hi A! Based on all the symbols I've <br/> reviewed from C, D, E, and myself, <br/> the only consistent common symbol <br/> across all cards is @. Could you <br/> confirm your symbols to finalize <br/> this conclusion?
     B -->> C :Hi C! Based on inputs from D, E, <br/> and myself, plus what you've <br/> shared, the common symbol across <br/> all cards appears to be @. Let me <br/> know if you hear differently from <br/> A!
     B -->> A :Hi A! Based on all the information <br/> from everyone else and my card, I <br/> am confident that the common symbol <br/> across all cards is @. Could you <br/> please confirm your symbols to <br/> finalize this?
@@ -147,17 +155,7 @@ sequenceDiagram
     B -->> C :Hi C! Based on all the gathered <br/> input from you, D, E, and my own <br/> card, I am confident the common <br/> symbol across all cards is @. Let <br/> me know if you hear anything new <br/> from A!
     B -->> A :Hi A! Based on all the information <br/> collected from my card and the <br/> shared symbols from C, D, and E, <br/> the only consistent common symbol <br/> across all cards is @. Could you <br/> please confirm your card symbols to <br/> validate this conclusion?
     B -->> C :Hi C! Based on all the gathered <br/> inputs from D, E, and myself, I am <br/> confident that the common symbol <br/> across all cards is @. Let me know <br/> if you hear anything different from <br/> A that may contradict or confirm <br/> this conclusion.
-    D -->> B :Hi B! Based on all updates from C, <br/> E, and myself, as well as <br/> consistent overlaps, I am fully <br/> confident that the common symbol <br/> across all cards is @. Do you have <br/> any final confirmation or <br/> contradictory information?
-	
-```	
-	
-```mermaid
-sequenceDiagram
-    actor A
-    participant B
-    participant C
-    participant D
-    participant E	
+    D -->> B :Hi B! Based on all updates from C, <br/> E, and myself, as well as <br/> consistent overlaps, I am fully <br/> confident that the common symbol <br/> across all cards is @. Do you have <br/> any final confirmation or <br/> contradictory information?	
     B -->> A :Hi A! Based on all the information <br/> I have from my card and the inputs <br/> from C, D, and E, I am fully <br/> confident that the common symbol <br/> across all cards is @. Could you <br/> confirm your symbols to finalize <br/> this confirmation?
     B -->> C :Hi C! I am confident that the <br/> common symbol across all cards is @ <br/> based on my card, your input, and <br/> updates from D and E. Let me know <br/> if you hear anything further from <br/> A.
     B -->> D :Hi D! Thank you for your input. I <br/> am confident that the common symbol <br/> across all cards is @ based on all <br/> the info gathered from C, E, and my <br/> own card. Let me know if you hear <br/> anything contradictory from A.
@@ -216,6 +214,14 @@ sequenceDiagram
     D -->> B :Based on all updates from C, E, and <br/> myself, as well as consistent <br/> overlap across everyone's symbols, <br/> I am fully confident that the <br/> common symbol across all cards is <br/> @. Please let me know if you have <br/> any final contradictory information <br/> or additional confirmations.
     C -->> D :Hi D! Based on all the gathered <br/> updates, the common symbol across <br/> all cards is clearly @. Please <br/> confirm if you are in full <br/> agreement or if you have any <br/> conflicting updates.
     E -->> B :Hi B! Based on all the shared <br/> information from you, C, D, and <br/> myself, I am confident that the <br/> common symbol across all 5 cards is <br/> @. Let me know if there are any <br/> conflicting updates or new insights <br/> from A.
+	```
+	```mermaid
+sequenceDiagram
+    actor A
+    participant B
+    participant C
+    participant D
+    participant E	
     B -->> D :Hi D! Based on the inputs from you, <br/> E, C, and myself, the common symbol <br/> is consistently @. Let me know if <br/> you hear anything from A that <br/> confirms or updates this <br/> conclusion.
     E -->> B :Hi B! Based on everyone's shared <br/> information, including the <br/> confirmations from you, C, and D, I <br/> am also confident that the common <br/> symbol across all cards is @. Let <br/> me know if you receive any further <br/> updates or hear differently!
     A -->> B :@B I don't have @
