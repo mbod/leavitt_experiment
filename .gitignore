@@ -3,6 +3,33 @@
 /.quarto/
 _site/
 
+
+# Ignore backup files
+*~
+
+# Ignore temporary files
+#*
+
+# Ignore auto-save files
+#*#
+
+# Ignore Emacs desktop files
+/.emacs.desktop
+/.emacs.desktop.lock
+
+# Ignore compiled Emacs Lisp files
+*.elc
+
+# Ignore auto-save list files
+auto-save-list
+
+
+
+*.*#
+*.*~
+
+.env
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
