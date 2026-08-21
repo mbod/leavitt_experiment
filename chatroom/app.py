@@ -10,7 +10,15 @@
 from flask import Flask, request, render_template, session, url_for
 from flask_socketio import SocketIO, join_room, leave_room, send
 import logging
+from  multiprocessing import Queue, Process
+from uuid import uuid4
+from collections import defaultdict
 
+
+from client_ws import run_agent
+
+
+PARTICIPANTS=['A','B','C']
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'coll@bplan!'
@@ -22,8 +30,18 @@ socketio = SocketIO(app)
 #       to a persistent db
 messages = []
 
+rooms = defaultdict(list)
+
 # TODO: migrate to redis
 connected_clients = {}
+
+# create process queue and agent dictionary for agents
+agent_queue = Queue()
+agents = {}
+
+
+
+
 
 
 # --- app routes --------------------------------------------------
@@ -39,9 +57,51 @@ def chatroom():
     
     room = session.get('room')
 
-
+    if request.args.get('user_id', False):
+        PARTICIPANTS = [ request.args.get('user_id') ]
+    else:
+        PARTICIPANTS = ['A','B','C']
+    
     return render_template('chatroom.html',
-                           room=room)
+                           room=room,
+                           participants=PARTICIPANTS)
+
+
+
+@app.route('/')
+def create_room():
+
+    return render_template('create_room.html')
+
+
+
+
+@app.route('/add_agent/<agent_id>/to/<room_id>')
+def add_agent(agent_id, room_id):
+
+    # check room_id to see if agent already in room
+    if agent_id in rooms.get(room_id, []):
+        return f"Agent {agent_id} already in Room {room_id}"
+    
+    # Generate a unique task ID
+    task_id = str(uuid4())
+
+    rooms[room_id].append(agent_id)
+    agents[task_id] = {"status": "processing", "result": None}
+
+    # Start a child process to agent
+    process = Process(
+        target=run_agent,
+        args=(agent_id, room_id)  
+    )
+    process.start()
+    process.join()
+ 
+    return f"Agent {agent_id} started in Room {room_id} with TaskID {task_id}"
+
+
+
+                           
 
 
 # ----- SOCKETIO handlers -----------------------------------------
@@ -103,7 +163,17 @@ def handle_message(payload):
 
     logger.info(f'Sending {payload} to {room}')
     send(payload, to=room)
+
+@socketio.on('task_begin')
+def handle_begin_task(payload):
+    '''Signal that task has begin and participants can begin'''
+    pass
     
+@socketio.on('task_complete')
+def handle_end_task(payload):
+    '''Handle participant signal that they think task is complete'''
+    pass
+
     
     
 if __name__ == "__main__":

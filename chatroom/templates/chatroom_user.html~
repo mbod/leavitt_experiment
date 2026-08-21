@@ -13,27 +13,13 @@
         <img src="{{url_for('static', filename='images/image'+part+'.svg')}}"/>
         </div>
     {% endfor %}
-
   </div>
-
-  
-
-  {% if participants|length==1 %}
-    <div id="message-box">
-      <input type="text" placeholder="Enter your message" id="message-input" name="message" />
-      <button type="submit" id="send-btn" onclick="sendMessage()">Send</button>
-    </div>
-  {% endif %}
-
-  
+    
 </div>
 
     <script type="text/javascript">
     const socketio = io();
 
-      {% if participants|length==1 %}
-      const from = '{{participants[0]}}';
-      {% endif %}
 
 
     console.log(socketio);
@@ -62,22 +48,7 @@
       messages.scrollTop = messages.scrollHeight;        
     }
 
-
-	   
-    function sendMessage() {
-      var msgInput = document.getElementById("message-input");
-      var msg = msgInput.value;
-      if (msg === "") return;
-
-            
-	console.log(`User ${from} message: ${msg}`);
-
-	socketio.emit("message", { message: msg, from: from });
-      msgInput.value = "";
-    }
-
-
-      
+	
   </script>
 
     

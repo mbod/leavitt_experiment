@@ -36,9 +36,18 @@
       {% endif %}
 
 
-    console.log(socketio);
+      console.log(socketio);
+
+
+      socketio.on("task_begin", function () {
+	  console.
+
+      });
       
-    socketio.on("message", function (message) { console.log('WS: ' + message); createChatItem(message.message, message.from) });
+      socketio.on("message", function (message) {
+		      console.log('WS: ' + message);
+		      createChatItem(message.message, message.from) });
+      
 
 
         
